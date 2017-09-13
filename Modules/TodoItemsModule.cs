@@ -26,14 +26,21 @@ namespace NancyTodo.Modules
                 x => this._repository.GetAll());
 
             this.Get("/{id}",
-                x => this._repository.Get(x.id));
+                x => 
+                {
+                    var item = this._repository.Get(x.id);
+                    if (item != null)
+                        return item;
+                        
+                    return (Nancy.Response)Nancy.HttpStatusCode.NotFound;
+                });
 
             this.Post("/",
                 x =>
                 {
                     var itemTitle = RequestStream.FromStream(Request.Body).AsString();
                     if (string.IsNullOrWhiteSpace(itemTitle))
-                        return HttpStatusCode.BadRequest;
+                        return (Nancy.Response)Nancy.HttpStatusCode.BadRequest;
 
                     var item = this._repository.Add(new Core.Models.TodoItem { Title = itemTitle });
 
@@ -44,7 +51,14 @@ namespace NancyTodo.Modules
                 });
 
             this.Put("/{id}/complete",
-                x => this._repository.Complete(x.id));
+                x => 
+                {
+                    var item = this._repository.Complete(x.id);
+                    if (item != null)
+                        return item;
+                        
+                    return (Nancy.Response)Nancy.HttpStatusCode.NotFound;
+                });
         }
     }
 }
