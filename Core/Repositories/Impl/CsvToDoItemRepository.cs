@@ -16,7 +16,7 @@ namespace NancyTodo.Core.Repositories.Impl
         private void EnsureCsvFile()
         {
             if (!File.Exists(CsvSourcePath))
-                File.CreateText(CsvSourcePath);
+                File.Create(CsvSourcePath);
         }
 
         private CsvReader GetReader()
