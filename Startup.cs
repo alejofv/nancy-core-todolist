@@ -24,7 +24,9 @@ namespace NancyTodo
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseOwin(x => x.UseNancy());
+            app.UseOwin(
+                x => x.UseNancy(
+                    opt => opt.Bootstrapper = new Bootstrapper()));
         }
     }
 }

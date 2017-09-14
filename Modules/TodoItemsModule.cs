@@ -32,7 +32,7 @@ namespace NancyTodo.Modules
                     if (item != null)
                         return item;
                         
-                    return (Nancy.Response)Nancy.HttpStatusCode.NotFound;
+                    return Nancy.HttpStatusCode.NotFound;
                 });
 
             this.Post("/",
@@ -40,7 +40,7 @@ namespace NancyTodo.Modules
                 {
                     var itemTitle = RequestStream.FromStream(Request.Body).AsString();
                     if (string.IsNullOrWhiteSpace(itemTitle))
-                        return (Nancy.Response)Nancy.HttpStatusCode.BadRequest;
+                        return Nancy.HttpStatusCode.BadRequest;
 
                     var item = this._repository.Add(new Core.Models.TodoItem { Title = itemTitle });
 
@@ -57,7 +57,7 @@ namespace NancyTodo.Modules
                     if (item != null)
                         return item;
                         
-                    return (Nancy.Response)Nancy.HttpStatusCode.NotFound;
+                    return Nancy.HttpStatusCode.NotFound;
                 });
         }
     }
