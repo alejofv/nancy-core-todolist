@@ -20,10 +20,13 @@ namespace NancyTodo.Modules
             this._repository = repository;
 
             this.Get("/",
-                x => this._repository.GetActive());
-
-            this.Get("/all",
                 x => this._repository.GetAll());
+                
+            this.Get("/active",
+                x => this._repository.GetByStatus(false));
+
+            this.Get("/completed",
+                x => this._repository.GetByStatus(true));
 
             this.Get("/{id}",
                 x => 

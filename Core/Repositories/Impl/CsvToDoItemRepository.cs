@@ -52,10 +52,10 @@ namespace NancyTodo.Core.Repositories.Impl
             }
         }
 
-        public IList<TodoItem> GetActive()
+        public IList<TodoItem> GetByStatus(bool completedStatus)
         {
             return this.GetAll()
-                .Where(i => !i.IsCompleted)
+                .Where(i => i.IsCompleted == completedStatus)
                 .ToList();
         }
 

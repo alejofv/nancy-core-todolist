@@ -9,7 +9,7 @@ namespace NancyTodo.Core.Repositories
     {
         IList<Models.TodoItem> GetAll();
 
-        IList<Models.TodoItem> GetActive();
+        IList<Models.TodoItem> GetByStatus(bool completedStatus);
 
         Models.TodoItem Get(string id);
 
