@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NancyTodo.Core.Models
+namespace NancyTodo.Core.Entities
 {
     public class TodoItem
     {

@@ -1,27 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
-using Nancy.Extensions;
-using Nancy.IO;
-using Nancy.ModelBinding;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Nancy.Extensions;
+using Nancy.IO;
 
 namespace NancyTodo.Modules
 {
     public class TodoItemsModule : Nancy.NancyModule
     {
-        private readonly Core.Repositories.ITodoItemRepository _repository;
+        private readonly Core.ITodoItemRepository _repository;
 
-        public TodoItemsModule(Core.Repositories.ITodoItemRepository repository)
+        public TodoItemsModule(Core.ITodoItemRepository repository)
             : base("todo")
         {
             this._repository = repository;
 
             this.Get("/",
                 x => this._repository.GetAll());
-                
+
             this.Get("/active",
                 x => this._repository.GetByStatus(false));
 
@@ -45,7 +43,7 @@ namespace NancyTodo.Modules
                     if (string.IsNullOrWhiteSpace(itemTitle))
                         return Nancy.HttpStatusCode.BadRequest;
 
-                    var item = this._repository.Add(new Core.Models.TodoItem { Title = itemTitle });
+                    var item = this._repository.Add(new Core.Entities.TodoItem { Title = itemTitle });
 
                     var response = (Nancy.Response)item.Id;
                     response.StatusCode = Nancy.HttpStatusCode.Created;

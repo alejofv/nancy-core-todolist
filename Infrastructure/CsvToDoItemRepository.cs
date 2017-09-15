@@ -1,13 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NancyTodo.Core.Models;
+using NancyTodo.Core;
+using NancyTodo.Core.Entities;
 using CsvHelper;
-using System.IO;
 using CsvHelper.Configuration;
 
-namespace NancyTodo.Core.Repositories.Impl
+namespace NancyTodo.Infrastructure
 {
     public class CsvToDoItemRepository : ITodoItemRepository
     {
